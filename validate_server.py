@@ -29,13 +29,14 @@ client = {
     "V26": 	-0.189115,
     "V27": 0.133558,
     "V28": -0.021053,
-    "Amount": 0.244964
+    "Amount": 100
 }
 resp = requests.post(url, json=client) 
 resp.raise_for_status() 
 data = resp.json() 
-if data == 0:
-    print("Predicted Class: not fraud")
+prediction = data.get("prediction", 0)  # get the value of "prediction" or default to 0 if it doesn't exist
+if prediction == 0:
+    print(f"Predicted Class: not fraud")
 else:
-    print("Predicted Class: fraud")
+    print(f"Predicted Class: fraud")
 print(f"Predicted probability: {data}")
