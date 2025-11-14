@@ -138,13 +138,14 @@ df.head()
 
 # Data is very Imbalanced.
 # Let's visualize it
-class_counts = df['Class'].value_counts()
-plt.figure(figsize=(10, 6))
-plt.bar(class_counts.index, class_counts.values)
-plt.title('Count of Classes (Matplotlib Bar Plot)')
-plt.xlabel('Class')
-plt.ylabel('Count')
-plt.show()
+
+# class_counts = df['Class'].value_counts()
+# plt.figure(figsize=(10, 6))
+# plt.bar(class_counts.index, class_counts.values)
+# plt.title('Count of Classes (Matplotlib Bar Plot)')
+# plt.xlabel('Class')
+# plt.ylabel('Count')
+# plt.show()
 
 # In[24]:
 
@@ -160,8 +161,6 @@ df_train, df_val = train_test_split(df_full_train, test_size = 0.25, random_stat
 
 # In[26]:
 
-
-len(df_train), len(df_val), len(df_test)
 
 
 # In[27]:
@@ -215,30 +214,6 @@ test_dicts = df_test.to_dict(orient = 'records')
 X_train = dv.fit_transform(train_dicts)
 X_val = dv.transform(val_dicts)
 X_test = dv.transform(test_dicts)
-
-
-# In[34]:
-
-
-X_train
-
-
-# In[35]:
-
-
-X_val
-
-
-# In[36]:
-
-
-X_test
-
-
-# In[ ]:
-
-
-
 
 
 # # Modelling
@@ -304,19 +279,16 @@ dtc.fit(X_train, y_train)
 
 # In[42]:
 
+y_pred = dtc.predict(X_test)
 
 cm = confusion_matrix(y_val, y_pred)
 plt.figure(figsize=(15,10))
 sns.heatmap(cm, annot = True)
 plt.show()
 
-
-
-y_pred = dtc.predict(X_test)  
-
+  
 
 # In[44]:
-
 
 accuracy = accuracy_score(y_test, y_pred)
 print(f"Model Accuracy: {accuracy:.4f}")
