@@ -29,7 +29,7 @@ client = {
     "V26": 	-0.189115,
     "V27": 0.133558,
     "V28": -0.021053,
-    "Amount": 100
+    "Amount":0.244964
 }
 resp = requests.post(url, json=client) 
 resp.raise_for_status() 
