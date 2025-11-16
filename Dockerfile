@@ -1,8 +1,11 @@
 FROM python:3.13-slim-bookworm
 
-RUN pip install uv
+# RUN pip install uv
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 WORKDIR /app
+
+ENV PATH="/code/.venv/bin:$PATH"
 
 COPY ".python-version" "pyproject.toml" "uv.lock" ./
 

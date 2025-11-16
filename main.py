@@ -13,7 +13,7 @@ app = FastAPI(title="Decision_Tree_Model")
 # Load the trained model from the pickle file
 with open('credit_card_fraud_detection.pkl', 'rb') as f:
     dv = pickle.load(f)
-    dtc = pickle.load(f) 
+    rf = pickle.load(f) 
 
 class ClientData(BaseModel):
         V1: float 
@@ -50,7 +50,7 @@ class ClientData(BaseModel):
 async def score(client: ClientData): 
     payload = client.model_dump() # or client.dict() for pydantic v1 
     X = dv.transform([payload]) 
-    pred = dtc.predict(X)[0] 
+    pred = rf.predict(X)[0] 
     return {"prediction": int(pred)}
 
     # prediction = client.dict()
@@ -61,7 +61,6 @@ async def score(client: ClientData):
 @app.get("/")
 async def root():
     return{"message": "Welcome to the Decision Tree Model API. Use the /score endpoint to get predictions."}
-# return {"requests.post(url, json=client).json()"}
 
 if __name__ == "__main__":
     import uvicorn
