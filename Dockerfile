@@ -1,21 +1,23 @@
 FROM python:3.13-slim-bookworm
 
-# RUN pip install uv
+# Copy uv binary
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 WORKDIR /app
 
-ENV PATH="/code/.venv/bin:$PATH"
+# Copy project files
+COPY "pyproject.toml" "uv.lock" ./
 
-COPY ".python-version" "pyproject.toml" "uv.lock" ./
-
+# Sync dependencies
 RUN uv sync --locked  
 
+# Copy application files
 COPY "main.py" "credit_card_fraud_detection.pkl" ./
 
 EXPOSE 8000
 
-ENTRYPOINT [ "uv", "run", "uvicorn", "main:app", "--host", "127.0.0.1", "--port", "8000" ]
+# Run uvicorn with 0.0.0.0 to accept external connections
+CMD ["uv", "run", "--", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 
 
 
