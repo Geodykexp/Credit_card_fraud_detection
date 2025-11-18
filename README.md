@@ -395,12 +395,30 @@ Note: The Dockerfile expects credit_card_fraud_detection.pkl to be present durin
 
 
 ## Deployment
-The repository includes a fly.toml which can be adapted for Fly.io deployments. Typical workflow:
-- Ensure the API runs locally with the model file
-- Build and push the image to a registry (or use Fly's builder)
-- Configure environment/volumes if you plan to swap the model at runtime
-- Deploy according to Fly.io docs
+The repository includes a fly.toml which can be adapted for Fly.io deployments. 
 
+For this project the workflow include:
+- Ensure the API runs locally with the model file
+
+- Configure environment/volumes if you plan to swap the model at runtime
+Changed --host 127.0.0.1 (for local connections) → --host 0.0.0.0 (allows external connections)
+Removed  ENV PATH for the local 'app' created on docker image and .python-version copy
+Simplified PATH handling (not needed with uv run)
+Created fly.toml configuration
+Updated main.py host binding to 0.0.0.0
+changed port in 'main.py' and redeployed
+Removed 'uv' and 'run' in dockerfile
+
+- Build and push the image to a registry (or use Fly's builder)
+install the Fly.io CLI. Let me install it using PowerShell:
+powershell -Command "iwr https://fly.io/install.ps1 -useb | iex"
+flyctl deploy
+&"$ENV:USERPROFILE\.fly\bin\flyctl.exe" deploy
+Would you like to sign in? Do you want to send y followed by Enter to the terminal?
+&"$ENV:USERPROFILE\.fly\bin\flyctl.exe" apps create credit-card-fraud-detection
+&"$ENV:USERPROFILE\.fly\bin\flyctl.exe" deploy
+
+- Deploy according to Fly.io docs
 
 ## Troubleshooting
 - Import/Runtime errors: Ensure Python 3.13+ and dependencies are installed.
