@@ -220,6 +220,7 @@ The repository includes a fly.toml which can be adapted for Fly.io deployments.
 
 For this project the workflow include:
 - Ensure the API runs locally with the model file
+
 - Configure environment/volumes to swap the model at runtime
 - Changed --host 127.0.0.1 (for local connections) → --host 0.0.0.0 (allows external connections)
 - Removed  ENV PATH for the local 'app' created on docker image and .python-version copy
