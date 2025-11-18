@@ -1,5 +1,5 @@
 # Credit Card Fraud Detection
->>>>>>> Added detailed ML model and FastAPI sections
+Added detailed ML model and FastAPI sections
 
 A project for detecting fraudulent credit card transactions. It provides:
 - A trained model serialized to a single pickle file
@@ -9,15 +9,20 @@ A project for detecting fraudulent credit card transactions. It provides:
 
 
 ## Dataset
-The project uses the common anonymized credit card transactions dataset.
+The project uses the common anonymized credit card transactions dataset from Kaggle.
 - Source (hosted copy): https://www.dropbox.com/scl/fi/hh8c3x23wlmi2ra0cdwqv/creditcard.csv?rlkey=lnttjl0nftukwelj5e1cf1zwn&st=bkf1yeot&dl=0
 - Note: The file is large and not included in the repository.
 
 
 ## Machine Learning Model
-This project uses a scikit-learn model trained on the dataset above. The trained assets are serialized into credit_card_fraud_detection.pkl in the following order:
+This project uses a scikit-learn model trained on the dataset above. The following models were ran and compared to find the best performing model. They include:
+1) Logistic Regression model (lr)
+2) Decision Tree model (dtc)
+3) RandomForestClassifier model (rf)
+
+The best performing model was the RandomForestClassifier model (rf).s trained on the dataset and serialized to credit_card_fraud_detection.pkl in the following order:
 1) DictVectorizer (dv)
-2) Classifier model (rf, a RandomForestClassifier)
+2) RandomForestClassifier model (rf)
 
 Key points:
 - Features: V1..V28 and Amount (floats)
@@ -73,7 +78,6 @@ Interactive API docs are available at /docs when the server is running.
 - uv.lock — lockfile (for uv dependency manager)
 - Dockerfile — container build spec
 - fly.toml — config for Fly.io deployment (optional)
-- portfolio/ — additional assets (if any)
 
 
 ## Requirements
