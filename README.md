@@ -235,9 +235,9 @@ Created fly.toml configuration
 - PowerShell:powershell -Command "iwr https://fly.io/install.ps1 -useb | iex"
 - flyctl deploy
 - &"$ENV:USERPROFILE\.fly\bin\flyctl.exe" deploy
-- Would you like to sign in? Do you want to send y followed by Enter to the terminal?
 - &"$ENV:USERPROFILE\.fly\bin\flyctl.exe" apps create credit-card-fraud-detection
 - &"$ENV:USERPROFILE\.fly\bin\flyctl.exe" deploy
+
 - Deploy according to Fly.io docs
 
 ## Troubleshooting
