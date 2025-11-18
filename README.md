@@ -1,11 +1,10 @@
 # Credit Card Fraud Detection
-Added detailed ML model and FastAPI sections
 
 A project for detecting fraudulent credit card transactions. It provides:
-- A trained model serialized to a single pickle file
+- A trained model serialised to a single pickle file
 - A FastAPI service exposing a /score endpoint for predictions
 - Scripts/notebooks for training and quick validation
-- Docker support for containerized deployment
+- Docker support for containerised deployment
 
 
 ## Dataset
@@ -15,12 +14,7 @@ The project uses the common anonymized credit card transactions dataset from Kag
 
 
 ## Machine Learning Model
-This project uses a scikit-learn model trained on the dataset above. The following models were ran and compared to find the best performing model. They include:
-1) Logistic Regression model (lr)
-2) Decision Tree model (dtc)
-3) RandomForestClassifier model (rf)
-
-The best performing model was the RandomForestClassifier model (rf).s trained on the dataset and serialized to credit_card_fraud_detection.pkl in the following order:
+This project uses a scikit-learn model trained on the dataset above. The trained assets are serialised into credit_card_fraud_detection.pkl in the following order:
 1) DictVectorizer (dv)
 2) RandomForestClassifier model (rf)
 
@@ -29,7 +23,7 @@ Key points:
 - Preprocessing: DictVectorizer maps JSON feature dicts to model-ready vectors
 - Inference: The API loads dv and rf, transforms incoming JSON, and returns a 0/1 class label
 
-Example (training-side) serialization pattern:
+Example (training-side) serialisation pattern:
 ```python
 import pickle
 from sklearn.feature_extraction import DictVectorizer
@@ -226,7 +220,7 @@ The repository includes a fly.toml which can be adapted for Fly.io deployments. 
 ## Troubleshooting
 - Import/Runtime errors: Ensure Python 3.13+ and dependencies are installed.
 - 422 Unprocessable Entity: Verify request JSON contains all features V1..V28 and Amount as floats.
-- Model not found: Ensure credit_card_fraud_detection.pkl is at project root before starting the API or building Docker image.
+- Model not found: Ensure credit_card_fraud_detection.pkl is at the project root before starting the API or building a Docker image.
 - Dependency resolution issues: If not using uv, install FastAPI, Uvicorn, scikit-learn, and requests with pip as shown.
 
 
